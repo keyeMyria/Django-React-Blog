@@ -8,7 +8,7 @@ import EditPost from './edit_post';
 import Signup from './signup_form';
 import Signin from './signin_form';
 
-import requireAuth from './HOC/authenticate';
+import requireAuth from '../hoc/authenticate';
 
 import {signout} from '../actions/Authentication';
 
@@ -57,7 +57,7 @@ class Header extends Component{
 				<Route path = "/create_post" component= {requireAuth(PostNew)}/>
 				<Route path = "/view_post/:id" component = {requireAuth(ViewPost)}/>
 				<Route path = "/edit_post/:id" component = {requireAuth(EditPost)}/>
-			</div>	
+			</div>
 		);
 	}
 }
@@ -69,4 +69,3 @@ function mapStateToProps(state){
 }
 
 export default withRouter(connect(mapStateToProps,{signout})(Header));
-
