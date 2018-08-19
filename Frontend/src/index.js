@@ -1,31 +1,17 @@
+import 'spectre.css/dist/spectre.min.css';
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-//redux imports
-import { createStore, applyMiddleware} from 'redux';
-//react-redux imports
-import {Provider} from 'react-redux';
-import {createLogger} from 'redux-logger';
-import ReduxThunk from 'redux-thunk';
-import ReduxPromise from 'redux-promise';
-//file imports
-import Header from './containers/header';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './redux-store';
+import App from './components/app';
 
-import reducers from './reducers';
-import {AUTH_USER} from './actions/types';
-
-
-const createStoreWithMiddleware = applyMiddleware(ReduxThunk,ReduxPromise)(createStore);
-const store = createStoreWithMiddleware(reducers);
-const token =localStorage.getItem('token');
-if(token){
-	store.dispatch({type:AUTH_USER});
-}
-
+const rootDiv = document.getElementById('root');
 render(
 	<Provider store={store}>
 		<Router>
-			<Header/>
+			<App />
 		</Router>
-	</Provider>
-	,document.getElementById('root'));
+	</Provider>,
+	rootDiv
+);
